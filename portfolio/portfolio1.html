@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        /* =========================================
+           1. GLOBAL RESET & BOX SIZING
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            /* Note: box-sizing: border-box means padding is included inside the width */
+            box-sizing: border-box; 
+        }
+
+        body {
+            /* Note: font-family: inherit helps buttons/inputs match the body */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #6b66d6; /* Base color */
+            background: linear-gradient(135deg, #6b66d6 0%, #5a54c9 100%);
+            color: white;
+            min-height: 100vh; /* Note: min-height: 100vh means at least 100% of browser screen height */
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =========================================
+           2. NAVBAR (z-index & backdrop-filter)
+           ========================================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            /* Note: z-index: 5 ensures navbar stays above page content */
+            z-index: 5; 
+            /* Note: backdrop-filter blurs content behind the navbar */
+            backdrop-filter: blur(10px); 
+            background: rgba(255, 255, 255, 0.1); 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            /* Note: padding with 3 values: top, left/right, bottom */
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex; /* Note: display: flex arranges child elements */
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 16px;
+            /* Note: transition makes the color change smooth */
+            transition: color 0.3s ease; 
+        }
+
+        .nav-links a:hover {
+            color: #ffaa00; /* Highlight color on hover */
+        }
+
+        /* =========================================
+           3. HERO SECTION (Flexbox & Animations)
+           ========================================= */
+        .hero {
+            /* Note: parent is display: flex */
+            display: flex; 
+            align-items: center;
+            justify-content: space-between;
+            /* Note: max-width 1200px and margin 0 auto centers the container */
+            max-width: 1200px; 
+            margin: 0 auto; 
+            min-height: 100vh;
+            /* Note: We add top padding so content doesn't hide behind fixed navbar */
+            padding: 120px 50px 60px; 
+            gap: 50px;
+        }
+
+        .hero-content {
+            /* Note: flex: 1 means take the available remaining space */
+            flex: 1; 
+            /* Initial state for animation */
+            opacity: 0; 
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-content h1 span {
+            color: #ffaa00; /* "Unknown" text color */
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 500px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* =========================================
+           4. BUTTON & HOVER EFFECTS
+           ========================================= */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #ff6b35, #ff4b2b);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            /* Note: inherits font from body */
+            font-family: inherit; 
+            border: none;
+            cursor: pointer;
+            /* Note: transition allows smooth transform */
+            transition: transform 0.3s ease; 
+            opacity: 0;
+        }
+
+        .btn:hover {
+            /* Note: translateY(-3px) moves the button UP (negative Y is up) */
+            transform: translateY(-3px); 
+        }
+
+        /* =========================================
+           5. IMAGE HANDLING (overflow & object-fit)
+           ========================================= */
+        .hero-image {
+            /* Note: flex-shrink: 0 prevents the image from shrinking */
+            flex-shrink: 0; 
+            width: 320px;
+            height: 320px;
+            border-radius: 20px;
+            /* Note: overflow: hidden cuts off anything outside the box */
+            overflow: hidden; 
+            opacity: 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            /* Note: object-fit: cover fills the container without stretching, crops extra */
+            object-fit: cover; 
+            /* Note: display: block removes the 3-4px gap at the bottom of images */
+            display: block; 
+        }
+
+        /* =========================================
+           6. ANIMATIONS (Keyframes & Delays)
+           ========================================= */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Note: animation: name duration timing-function fill-mode */
+        .hero-title {
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0s; /* Starts immediately */
+        }
+
+        .hero-subtitle {
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.3s; /* Starts after 0.3s */
+        }
+
+        .hero-btn {
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.6s; /* Starts after 0.6s */
+        }
+
+        .hero-image {
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.9s; /* Starts after 0.9s */
+        }
+
+        /* =========================================
+           7. SKILL BARS (from the final notes)
+           ========================================= */
+        .skills-section {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .skills-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .skill {
+            margin-bottom: 20px;
+        }
+
+        .skill-name {
+            margin-bottom: 5px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .skill-bar-container {
+            width: 100%;
+            height: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .skill-bar {
+            height: 100%;
+            width: 0; /* Starts at 0 */
+            background: #ffaa00;
+            border-radius: 6px;
+        }
+
+        /* Note: Different skills have different final percentages */
+        @keyframes fillHtml {
+            from { width: 0; }
+            to { width: 90%; }
+        }
+
+        @keyframes fillCss {
+            from { width: 0; }
+            to { width: 85%; }
+        }
+
+        @keyframes fillJs {
+            from { width: 0; }
+            to { width: 80%; }
+        }
+
+        @keyframes fillAnimation {
+            from { width: 0; }
+            to { width: 75%; }
+        }
+
+        .html-bar { animation: fillHtml 1.5s ease forwards; }
+        .css-bar { animation: fillCss 1.5s ease forwards; }
+        .js-bar { animation: fillJs 1.5s ease forwards; }
+        .animation-bar { animation: fillAnimation 1.5s ease forwards; }
+
+        /* =========================================
+           8. RESPONSIVE DESIGN (Basic)
+           ========================================= */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 150px;
+            }
+            .hero-content p {
+                margin: 0 auto 40px;
+            }
+            .nav-links {
+                display: none; /* Hide links on mobile for simplicity */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">MyPortfolio</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Project</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Hi I'm <span>Unknown</span></h1>
+            <p class="hero-subtitle">A Frontend Developer exploring the world of design and open-source. Turning ideas into interactive, user-friendly web applications.</p>
+            <a href="#" class="btn hero-btn">View My Work</a>
+        </div>
+        
+        <div class="hero-image">
+            <!-- Using a placeholder image that resembles the avatar in your screenshot -->
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Unknown&backgroundColor=b6e3f4" alt="Profile Picture">
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION (From your final notes) -->
+    <section class="skills-section">
+        <h2>My Skills</h2>
+        
+        <div class="skill">
+            <span class="skill-name">HTML & CSS (90%)</span>
+            <div class="skill-bar-container">
+                <div class="skill-bar html-bar"></div>
+            </div>
+        </div>
+
+        <div class="skill">
+            <span class="skill-name">JavaScript (85%)</span>
+            <div class="skill-bar-container">
+                <div class="skill-bar css-bar"></div>
+            </div>
+        </div>
+
+        <div class="skill">
+            <span class="skill-name">Git (80%)</span>
+            <div class="skill-bar-container">
+                <div class="skill-bar js-bar"></div>
+            </div>
+        </div>
+
+        <div class="skill">
+            <span class="skill-name">Animation (75%)</span>
+            <div class="skill-bar-container">
+                <div class="skill-bar animation-bar"></div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="">
+
+        </div>
+    </section>
+
+</body>
+</html>
