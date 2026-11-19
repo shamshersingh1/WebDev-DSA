@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; gap:10px">
+        <h1>Calculator</h1>
+        <div>
+            <label for="input1">First Number</label>
+            <input type="number" required placeholder="Enter FirstNumber" id="input1">
+        </div>
+        <div>
+            <label for="input2">Second Number</label>
+            <input type="number" required placeholder="Enter SecondNumber" id="input2">
+        </div>
+        <div>
+            <button style="padding:10px;" id="add">+</button>
+            <button style="padding:10px;" id="sub">-</button>
+            <button style="padding:10px;" id="mul">*</button>
+            <button style="padding:10px;" id="div">/</button>
+        </div>
+        <div>
+            <button id="calElem">Calculate</button>
+            <p>Output is: <span id="output">0</span></p>
+        </div>
+    </div>
+</body>
+</html>
