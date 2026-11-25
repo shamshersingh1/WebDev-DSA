@@ -1,5 +1,73 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: white;
+}
+
+h1 {
+    font-size: 35px;
+    margin-bottom: 15px;
+    color: #00d4ff;
+}
+
+input {
+    padding: 12px;
+    width: 220px;
+    border: 2px solid #00d4ff;
+    border-radius: 8px;
+    outline: none;
+    font-size: 16px;
+    margin: 8px;
+}
+
+label {
+    display: inline-block;
+    width: 110px;
+    font-size: 15px;
+}
+
+button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: #00d4ff;
+    color: #141e30;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ffffff;
+    transform: scale(1.05);
+}
+
+#calElem {
+    background-color: #00c853;
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+}
+
+#calElem:hover {
+    background-color: #009624;
+}
+
+p {
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+#output {
+    color: #00ff88;
+    font-weight: bold;
+    font-size: 24px;
 }
